@@ -209,6 +209,10 @@
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <div class="form-text text-muted small mt-1">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Must be at least 8 characters with uppercase, lowercase, number, and special character.
+                    </div>
                 </div>
 
                 <div class="form-floating">

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('login_attempts', function (Blueprint $table) {
             $table->id();
+            $table->string('ip_address', 45);
+            $table->string('username')->nullable();
+            $table->integer('attempts')->default(0);
+            $table->timestamp('locked_until')->nullable();
             $table->timestamps();
         });
     }

@@ -22,7 +22,17 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'nullable|string|max:20',
-            'password' => 'required|confirmed|min:8',
+            'password' => [
+                'required',
+                'confirmed',
+                'min:8',
+                'regex:/[a-z]/',      // at least one lowercase
+                'regex:/[A-Z]/',      // at least one uppercase
+                'regex:/[0-9]/',      // at least one digit
+                'regex:/[@$!%*#?&]/', // at least one special char
+            ],
+        ], [
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).',
         ]);
 
         // Create new user in users table
@@ -37,6 +47,10 @@ class RegisteredUserController extends Controller
         $companyEmail = 'deanmongi90@gmail.com';
         Mail::to($companyEmail)->send(new UserRegistered($user));
 
-        return redirect()->route('login')->with('status', 'Account created successfully! You can now login.');
+        // Send email verification notification
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('verification.notice')
+            ->with('status', 'Account created successfully! Please check your email to verify your account.');
     }
 }

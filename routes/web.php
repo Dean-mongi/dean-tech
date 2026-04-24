@@ -22,10 +22,10 @@ Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/services/{service}', [HomeController::class, 'showService'])->name('service.show');
 Route::get('/portfolio', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit');
+Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit')->middleware('throttle:contact');
 
-// Admin routes
-Route::middleware(['auth'])->group(function () {
+// Admin routes - require admin role
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/services', [AdminController::class, 'services'])->name('admin.services');
     Route::get('/admin/projects', [AdminController::class, 'projects'])->name('admin.projects');
