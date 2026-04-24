@@ -28,8 +28,24 @@
 - [x] 17. Create verify-email view
 - [x] 18. Add email verification routes in routes/auth.php
 
+## Phase 6: Blade to Pure PHP Conversion (Shared Hosting Ready)
+- [x] 22. Create layouts/header.php and layouts/footer.php with $baseUrl helper
+- [x] 23. Convert home.blade.php → home.php
+- [x] 24. Convert about.blade.php → about.php
+- [x] 25. Convert services.blade.php → services.php
+- [x] 26. Convert service.blade.php → service.php
+- [x] 27. Convert contact.blade.php → contact.php
+- [x] 28. Convert portfolio.blade.php → portfolio.php
+- [x] 29. Convert auth/login.blade.php → auth/login.php
+- [x] 30. Convert auth/register.blade.php → auth/register.php
+- [x] 31. Convert auth/verify-email.blade.php → auth/verify-email.php
+- [x] 32. Convert admin/dashboard.blade.php → admin/dashboard.php
+- [x] 33. Rename old .blade.php files to .blade.php.bak
+- [x] 34. Fix image paths to use $baseUrl for shared hosting compatibility
+
 ## Follow-up Steps
 - [x] 19. Run migrations
 - [x] 20. Clear config cache
 - [ ] 21. Test all security features
+- [ ] 35. Test pure PHP views on XAMPP/shared hosting
 
