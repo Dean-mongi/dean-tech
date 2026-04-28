@@ -1,8 +1,6 @@
-<?php
-$pageTitle = 'Home - Dean Tech';
-include __DIR__ . '/layouts/header.php';
-?>
+@extends('layouts.app')
 
+@section('content')
 <!-- Hero Section -->
 <section class="hero position-relative overflow-hidden" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center;">
     <div class="container">
@@ -19,10 +17,10 @@ include __DIR__ . '/layouts/header.php';
                         we deliver excellence that drives your success.
                     </p>
                     <div class="d-flex gap-3 mb-4">
-                        <a href="<?php echo $baseUrl; ?>/contact" class="btn btn-warning btn-lg px-4 py-3 fw-bold">
+                        <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-4 py-3 fw-bold">
                             <i class="fas fa-rocket me-2"></i>Get Started Today
                         </a>
-                        <a href="<?php echo $baseUrl; ?>/services" class="btn btn-outline-light btn-lg px-4 py-3">
+                        <a href="{{ route('services') }}" class="btn btn-outline-light btn-lg px-4 py-3">
                             <i class="fas fa-eye me-2"></i>Explore Services
                         </a>
                     </div>
@@ -86,22 +84,22 @@ include __DIR__ . '/layouts/header.php';
             <p class="lead text-muted">Comprehensive IT solutions tailored for Tanzanian businesses</p>
         </div>
         <div class="row g-4">
-            <?php foreach ($services as $service): ?>
+            @foreach($services as $service)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 border-0 shadow-lg hover-card" style="transition: transform 0.3s ease;">
                         <div class="card-body text-center p-4">
                             <div class="service-icon mb-4" style="width: 80px; height: 80px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                                <i class="fas <?php echo htmlspecialchars($service->icon); ?> fa-2x text-white"></i>
+                                <i class="fas {{ $service->icon }} fa-2x text-white"></i>
                             </div>
-                            <h5 class="card-title fw-bold mb-3"><?php echo htmlspecialchars($service->title); ?></h5>
-                            <p class="card-text text-muted mb-4"><?php echo htmlspecialchars(Str::limit($service->description, 120)); ?></p>
-                            <a href="<?php echo $baseUrl; ?>/services/<?php echo $service->id; ?>" class="btn btn-primary px-4 py-2 fw-bold">
+                            <h5 class="card-title fw-bold mb-3">{{ $service->title }}</h5>
+                            <p class="card-text text-muted mb-4">{{ Str::limit($service->description, 120) }}</p>
+                            <a href="{{ route('service.show', $service) }}" class="btn btn-primary px-4 py-2 fw-bold">
                                 <i class="fas fa-arrow-right me-2"></i>Learn More
                             </a>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            @endforeach
         </div>
     </div>
 </section>
@@ -177,7 +175,7 @@ include __DIR__ . '/layouts/header.php';
         <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
         <p class="lead mb-4">Let's discuss how we can help you achieve your technology goals</p>
         <div class="d-flex justify-content-center gap-3">
-            <a href="<?php echo $baseUrl; ?>/contact" class="btn btn-warning btn-lg px-5 py-3 fw-bold">
+            <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold">
                 <i class="fas fa-envelope me-2"></i>Contact Us Today
             </a>
             <a href="tel:+255757624348" class="btn btn-outline-light btn-lg px-5 py-3">
@@ -229,5 +227,4 @@ include __DIR__ . '/layouts/header.php';
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 </style>
-
-<?php include __DIR__ . '/layouts/footer.php'; ?>
+@endsection

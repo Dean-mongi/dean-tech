@@ -1,8 +1,6 @@
-<?php
-$pageTitle = 'Contact Us - Dean Tech';
-include __DIR__ . '/layouts/header.php';
-?>
+@extends('layouts.app')
 
+@section('content')
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row">
@@ -77,69 +75,69 @@ include __DIR__ . '/layouts/header.php';
                                     Send us a Message
                                 </h3>
 
-                                <?php if (session('success')): ?>
+                                @if(session('success'))
                                     <div class="alert alert-success">
                                         <i class="fas fa-check-circle me-2"></i>
-                                        <?php echo htmlspecialchars(session('success')); ?>
+                                        {{ session('success') }}
                                     </div>
-                                <?php endif; ?>
+                                @endif
 
-                                <?php if ($errors->any()): ?>
+                                @if($errors->any())
                                     <div class="alert alert-danger">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
                                         Please fix the errors below.
                                     </div>
-                                <?php endif; ?>
+                                @endif
 
-                                <form action="<?php echo $baseUrl; ?>/contact" method="POST">
-                                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                <form action="{{ route('contact.submit') }}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Full Name *</label>
-                                        <input type="text" class="form-control <?php echo $errors->has('name') ? 'is-invalid' : ''; ?>"
-                                               id="name" name="name" value="<?php echo htmlspecialchars(old('name') ?? ''); ?>" required>
-                                        <?php if ($errors->has('name')): ?>
-                                            <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('name')); ?></div>
-                                        <?php endif; ?>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                               id="name" name="name" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email Address *</label>
-                                        <input type="email" class="form-control <?php echo $errors->has('email') ? 'is-invalid' : ''; ?>"
-                                               id="email" name="email" value="<?php echo htmlspecialchars(old('email') ?? ''); ?>" required>
-                                        <?php if ($errors->has('email')): ?>
-                                            <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('email')); ?></div>
-                                        <?php endif; ?>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                               id="email" name="email" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control <?php echo $errors->has('phone') ? 'is-invalid' : ''; ?>"
-                                               id="phone" name="phone" value="<?php echo htmlspecialchars(old('phone') ?? ''); ?>">
-                                        <?php if ($errors->has('phone')): ?>
-                                            <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('phone')); ?></div>
-                                        <?php endif; ?>
+                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                                               id="phone" name="phone" value="{{ old('phone') }}">
+                                        @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="service" class="form-label">Service Interested In</label>
-                                        <select class="form-select <?php echo $errors->has('service') ? 'is-invalid' : ''; ?>" id="service" name="service">
+                                        <select class="form-select @error('service') is-invalid @enderror" id="service" name="service">
                                             <option value="">Select a service...</option>
-                                            <option value="Network Administration" <?php echo (old('service') == 'Network Administration') ? 'selected' : ''; ?>>Network Administration</option>
-                                            <option value="Software Development" <?php echo (old('service') == 'Software Development') ? 'selected' : ''; ?>>Software Development</option>
-                                            <option value="Mobile Application Development" <?php echo (old('service') == 'Mobile Application Development') ? 'selected' : ''; ?>>Mobile Application Development</option>
+                                            <option value="Network Administration" {{ old('service') == 'Network Administration' ? 'selected' : '' }}>Network Administration</option>
+                                            <option value="Software Development" {{ old('service') == 'Software Development' ? 'selected' : '' }}>Software Development</option>
+                                            <option value="Mobile Application Development" {{ old('service') == 'Mobile Application Development' ? 'selected' : '' }}>Mobile Application Development</option>
                                         </select>
-                                        <?php if ($errors->has('service')): ?>
-                                            <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('service')); ?></div>
-                                        <?php endif; ?>
+                                        @error('service')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="message" class="form-label">Message *</label>
-                                        <textarea class="form-control <?php echo $errors->has('message') ? 'is-invalid' : ''; ?>"
-                                                  id="message" name="message" rows="5" required><?php echo htmlspecialchars(old('message') ?? ''); ?></textarea>
-                                        <?php if ($errors->has('message')): ?>
-                                            <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('message')); ?></div>
-                                        <?php endif; ?>
+                                        <textarea class="form-control @error('message') is-invalid @enderror"
+                                                  id="message" name="message" rows="5" required>{{ old('message') }}</textarea>
+                                        @error('message')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <button type="submit" class="btn btn-primary btn-lg w-100">
@@ -174,5 +172,4 @@ include __DIR__ . '/layouts/header.php';
         </div>
     </div>
 </section>
-
-<?php include __DIR__ . '/layouts/footer.php'; ?>
+@endsection

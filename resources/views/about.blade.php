@@ -1,8 +1,6 @@
-<?php
-$pageTitle = 'About Us - Dean Tech';
-include __DIR__ . '/layouts/header.php';
-?>
+@extends('layouts.app')
 
+@section('content')
 <!-- Hero Section -->
 <section class="hero position-relative overflow-hidden" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 70vh; display: flex; align-items: center;">
     <div class="container">
@@ -17,10 +15,10 @@ include __DIR__ . '/layouts/header.php';
                         businesses through innovative technology and exceptional service quality.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="<?php echo $baseUrl; ?>/contact" class="btn btn-warning btn-lg px-4 py-3 fw-bold">
+                        <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-4 py-3 fw-bold">
                             <i class="fas fa-handshake me-2"></i>Work With Us
                         </a>
-                        <a href="<?php echo $baseUrl; ?>/services" class="btn btn-outline-light btn-lg px-4 py-3">
+                        <a href="{{ route('services') }}" class="btn btn-outline-light btn-lg px-4 py-3">
                             <i class="fas fa-eye me-2"></i>Our Services
                         </a>
                     </div>
@@ -196,7 +194,7 @@ include __DIR__ . '/layouts/header.php';
             <div class="col-lg-4 mb-4">
                 <div class="team-card card border-0 shadow-lg text-center">
                     <div class="card-body p-4">
-                        <img src="<?php echo $baseUrl; ?>/images/ceo-founder.jpg" alt="Dean Mongi - CEO & Founder" class="rounded-circle mb-3 mx-auto d-block" style="width: 120px; height: 120px; object-fit: cover;">
+                        <img src="{{ url('images/ceo-founder.jpg') }}" alt="Dean Mongi - CEO & Founder" class="rounded-circle mb-3 mx-auto d-block" style="width: 120px; height: 120px; object-fit: cover;">
                         <h5 class="card-title fw-bold">Dean Mongi</h5>
                         <p class="text-primary mb-2">Founder & CEO</p>
                         <p class="card-text text-muted">Leading Dean Tech with vision and expertise in delivering exceptional IT solutions.</p>
@@ -218,7 +216,7 @@ include __DIR__ . '/layouts/header.php';
         <h2 class="display-5 fw-bold mb-4">Ready to Partner with Dean Tech?</h2>
         <p class="lead mb-4">Let's discuss how we can help transform your business with our expertise</p>
         <div class="d-flex justify-content-center gap-3">
-            <a href="<?php echo $baseUrl; ?>/contact" class="btn btn-warning btn-lg px-5 py-3 fw-bold">
+            <a href="{{ route('contact') }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold">
                 <i class="fas fa-envelope me-2"></i>Get In Touch
             </a>
             <a href="tel:+255757624348" class="btn btn-outline-light btn-lg px-5 py-3">
@@ -266,5 +264,4 @@ include __DIR__ . '/layouts/header.php';
     backdrop-filter: blur(10px);
 }
 </style>
-
-<?php include __DIR__ . '/layouts/footer.php'; ?>
+@endsection

@@ -1,27 +1,25 @@
-<?php
-$pageTitle = 'Our Services - Dean Tech';
-include __DIR__ . '/layouts/header.php';
-?>
+@extends('layouts.app')
 
+@section('content')
 <section class="py-5">
     <div class="container">
         <h1 class="text-center mb-5">Our Services</h1>
 
         <div class="row">
-            <?php foreach ($services as $service): ?>
+            @foreach($services as $service)
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <i class="fas <?php echo htmlspecialchars($service->icon); ?> fa-3x mb-3 text-primary"></i>
-                            <h5 class="card-title"><?php echo htmlspecialchars($service->title); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($service->description); ?></p>
-                            <a href="<?php echo $baseUrl; ?>/services/<?php echo $service->id; ?>" class="btn btn-primary mb-2">Learn More</a>
+                            <i class="fas {{ $service->icon }} fa-3x mb-3 text-primary"></i>
+                            <h5 class="card-title">{{ $service->title }}</h5>
+                            <p class="card-text">{{ $service->description }}</p>
+                            <a href="{{ route('service.show', $service) }}" class="btn btn-primary mb-2">Learn More</a>
                             <br>
-                            <a href="<?php echo $baseUrl; ?>/contact?service=<?php echo urlencode($service->title); ?>" class="btn btn-outline-primary btn-sm">Request This Service</a>
+                            <a href="{{ route('contact') }}?service={{ urlencode($service->title) }}" class="btn btn-outline-primary btn-sm">Request This Service</a>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            @endforeach
         </div>
 
         <!-- Detailed Service Sections -->
@@ -92,5 +90,4 @@ include __DIR__ . '/layouts/header.php';
         </div>
     </div>
 </section>
-
-<?php include __DIR__ . '/layouts/footer.php'; ?>
+@endsection

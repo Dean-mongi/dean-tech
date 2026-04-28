@@ -1,10 +1,4 @@
-<?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '/');
-$baseUrl = rtrim($scriptDir, '/');
-if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,6 +16,7 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding: 20px 0;
         }
+
         .register-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -32,25 +27,50 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             width: 100%;
             margin: 20px;
         }
+
         .register-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 2rem;
             text-align: center;
         }
-        .register-body { padding: 2rem; }
-        .form-floating { margin-bottom: 1.5rem; }
-        .form-floating > label { padding: 1rem 0.75rem; }
+
+        .register-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .register-body {
+            padding: 2rem;
+        }
+
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-floating > label {
+            padding: 1rem 0.75rem;
+        }
+
         .form-floating > .form-control {
             padding: 1rem 0.75rem;
             border: 2px solid #e1e5e9;
             border-radius: 10px;
             transition: all 0.3s ease;
         }
+
         .form-floating > .form-control:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
+
         .btn-register {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -62,17 +82,36 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             width: 100%;
             font-size: 1.1rem;
         }
+
         .btn-register:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
             color: white;
         }
-        .alert { border-radius: 10px; border: none; }
-        .login-link { text-align: center; margin-top: 1.5rem; }
-        .login-link a { color: #667eea; font-weight: 600; text-decoration: none; }
-        .login-link a:hover { text-decoration: underline; }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
         .company-logo {
-            width: 60px; height: 60px;
+            width: 60px;
+            height: 60px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
@@ -81,75 +120,95 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             margin: 0 auto 1rem;
             font-size: 1.5rem;
         }
-        .required-field::after { content: " *"; color: red; }
+
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
     </style>
 </head>
 <body>
     <div class="register-container">
+        <!-- Header -->
         <div class="register-header">
-            <div class="company-logo"><i class="fas fa-code"></i></div>
+            <div class="company-logo">
+                <i class="fas fa-code"></i>
+            </div>
             <h1>Dean Tech</h1>
             <p>Create Your Account</p>
         </div>
+
+        <!-- Registration Form -->
         <div class="register-body">
-            <?php if (session('status')): ?>
+            @if(session('status'))
                 <div class="alert alert-success">
                     <i class="fas fa-check-circle me-2"></i>
-                    <?php echo htmlspecialchars(session('status')); ?>
+                    {{ session('status') }}
                 </div>
-            <?php endif; ?>
+            @endif
 
-            <?php if (session('error')): ?>
+            @if(session('error'))
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle me-2"></i>
-                    <?php echo htmlspecialchars(session('error')); ?>
+                    {{ session('error') }}
                 </div>
-            <?php endif; ?>
+            @endif
 
-            <?php if ($errors->any()): ?>
+            @if($errors->any())
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle me-2"></i>
                     Please fix the errors below.
                 </div>
-            <?php endif; ?>
+            @endif
 
-            <form method="POST" action="<?php echo $baseUrl; ?>/register">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
                 <div class="form-floating">
-                    <input type="text" class="form-control <?php echo $errors->has('name') ? 'is-invalid' : ''; ?>"
-                           id="name" name="name" placeholder="Full Name" value="<?php echo htmlspecialchars(old('name') ?? ''); ?>" required>
-                    <label for="name" class="required-field"><i class="fas fa-user me-2"></i>Full Name</label>
-                    <?php if ($errors->has('name')): ?>
-                        <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('name')); ?></div>
-                    <?php endif; ?>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                           id="name" name="name" placeholder="Full Name"
+                           value="{{ old('name') }}" required>
+                    <label for="name" class="required-field">
+                        <i class="fas fa-user me-2"></i>Full Name
+                    </label>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control <?php echo $errors->has('email') ? 'is-invalid' : ''; ?>"
-                           id="email" name="email" placeholder="Email Address" value="<?php echo htmlspecialchars(old('email') ?? ''); ?>" required>
-                    <label for="email" class="required-field"><i class="fas fa-envelope me-2"></i>Email Address</label>
-                    <?php if ($errors->has('email')): ?>
-                        <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('email')); ?></div>
-                    <?php endif; ?>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                           id="email" name="email" placeholder="Email Address"
+                           value="{{ old('email') }}" required>
+                    <label for="email" class="required-field">
+                        <i class="fas fa-envelope me-2"></i>Email Address
+                    </label>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-floating">
-                    <input type="tel" class="form-control <?php echo $errors->has('phone') ? 'is-invalid' : ''; ?>"
-                           id="phone" name="phone" placeholder="Phone Number" value="<?php echo htmlspecialchars(old('phone') ?? ''); ?>">
-                    <label for="phone"><i class="fas fa-phone me-2"></i>Phone Number</label>
-                    <?php if ($errors->has('phone')): ?>
-                        <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('phone')); ?></div>
-                    <?php endif; ?>
+                    <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+                           id="phone" name="phone" placeholder="Phone Number"
+                           value="{{ old('phone') }}">
+                    <label for="phone">
+                        <i class="fas fa-phone me-2"></i>Phone Number
+                    </label>
+                    @error('phone')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-floating">
-                    <input type="password" class="form-control <?php echo $errors->has('password') ? 'is-invalid' : ''; ?>"
+                    <input type="password" class="form-control @error('password') is-invalid @enderror"
                            id="password" name="password" placeholder="Password" required>
-                    <label for="password" class="required-field"><i class="fas fa-lock me-2"></i>Password</label>
-                    <?php if ($errors->has('password')): ?>
-                        <div class="invalid-feedback"><?php echo htmlspecialchars($errors->first('password')); ?></div>
-                    <?php endif; ?>
+                    <label for="password" class="required-field">
+                        <i class="fas fa-lock me-2"></i>Password
+                    </label>
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                     <div class="form-text text-muted small mt-1">
                         <i class="fas fa-info-circle me-1"></i>
                         Must be at least 8 characters with uppercase, lowercase, number, and special character.
@@ -158,8 +217,11 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
 
                 <div class="form-floating">
                     <input type="password" class="form-control"
-                           id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
-                    <label for="password_confirmation" class="required-field"><i class="fas fa-lock me-2"></i>Confirm Password</label>
+                           id="password_confirmation" name="password_confirmation" 
+                           placeholder="Confirm Password" required>
+                    <label for="password_confirmation" class="required-field">
+                        <i class="fas fa-lock me-2"></i>Confirm Password
+                    </label>
                 </div>
 
                 <button type="submit" class="btn btn-register">
@@ -168,12 +230,13 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             </form>
 
             <div class="login-link">
-                <p class="mb-0">Already have an account?
-                    <a href="<?php echo $baseUrl; ?>/login">Sign In here</a>
+                <p class="mb-0">Already have an account? 
+                    <a href="{{ route('login') }}">Sign In here</a>
                 </p>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

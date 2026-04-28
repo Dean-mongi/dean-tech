@@ -108,6 +108,7 @@
 
         <!-- Projects Grid -->
         <div class="row g-4">
+            <!-- Project 1 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">
@@ -123,6 +124,7 @@
                 </div>
             </div>
 
+            <!-- Project 2 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">
@@ -138,6 +140,7 @@
                 </div>
             </div>
 
+            <!-- Project 3 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">
@@ -153,6 +156,7 @@
                 </div>
             </div>
 
+            <!-- Project 4 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">
@@ -168,6 +172,7 @@
                 </div>
             </div>
 
+            <!-- Project 5 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">
@@ -183,6 +188,7 @@
                 </div>
             </div>
 
+            <!-- Project 6 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card project-card h-100 shadow-sm">
                     <div class="card-body text-center p-4">

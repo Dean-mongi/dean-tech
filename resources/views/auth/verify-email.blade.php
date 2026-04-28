@@ -1,10 +1,4 @@
-<?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https' : 'http';
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '/');
-$baseUrl = rtrim($scriptDir, '/');
-if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +27,8 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             text-align: center;
         }
         .verify-icon {
-            width: 80px; height: 80px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
@@ -66,40 +61,45 @@ if ($baseUrl === '' || $baseUrl === '\\' || $baseUrl === '/') $baseUrl = '';
             padding: 0;
             cursor: pointer;
         }
-        .btn-link-custom:hover { text-decoration: underline; }
+        .btn-link-custom:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="verify-container">
-        <div class="verify-icon"><i class="fas fa-envelope"></i></div>
+        <div class="verify-icon">
+            <i class="fas fa-envelope"></i>
+        </div>
         <h2 class="mb-3">Verify Your Email</h2>
         <p class="text-muted mb-4">
             Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
         </p>
 
-        <?php if (session('status') === 'verification-link-sent'): ?>
+        @if(session('status') === 'verification-link-sent')
             <div class="alert alert-success mb-4">
                 <i class="fas fa-check-circle me-2"></i>
                 A new verification link has been sent to the email address you provided during registration.
             </div>
-        <?php endif; ?>
+        @endif
 
         <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-            <form method="POST" action="<?php echo $baseUrl; ?>/email/verification-notification">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
                 <button type="submit" class="btn btn-verify">
                     <i class="fas fa-paper-plane me-2"></i>Resend Verification Email
                 </button>
             </form>
 
-            <form method="POST" action="<?php echo $baseUrl; ?>/logout">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
                 <button type="submit" class="btn-link-custom">
                     <i class="fas fa-sign-out-alt me-1"></i>Log Out
                 </button>
             </form>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
