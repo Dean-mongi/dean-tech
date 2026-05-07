@@ -25,7 +25,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'submitContact'])->name('contact.submit')->middleware('throttle:contact');
 
 // Admin routes - require admin role
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth:admin', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/services', [AdminController::class, 'services'])->name('admin.services');
     Route::get('/admin/projects', [AdminController::class, 'projects'])->name('admin.projects');

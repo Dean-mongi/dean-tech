@@ -57,7 +57,7 @@ class AuthenticatedSessionController extends Controller
             ->first();
 
         if ($admin && Hash::check($request->password, $admin->password)) {
-            Auth::login($admin);
+            Auth::guard('admin')->login($admin);
             $request->session()->regenerate();
             LoginAttempt::clearAttempts($ipAddress);
 
@@ -75,6 +75,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         Auth::logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

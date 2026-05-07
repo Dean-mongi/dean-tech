@@ -14,7 +14,6 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ url('images/brand-logo.png') }}" alt="Dean Tech Logo" height="40" class="d-inline-block align-top me-2">
-                Dean Tech
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -38,11 +37,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
-                    @else
+                    @if(Auth::guard('admin')->check())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin</a>
                         </li>
@@ -55,7 +50,21 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-                    @endguest
+                    @elseif(Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -73,7 +82,6 @@
                 <div class="col-md-6">
                     <h5>
                         <img src="{{ url('images/brand-logo.png') }}" alt="Dean Tech Logo" height="30" class="me-2">
-                        Dean Tech
                     </h5>
                     <p>Professional IT Solutions in Tanzania</p>
                 </div>

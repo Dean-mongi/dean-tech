@@ -8,7 +8,30 @@
         <div class="row">
             @foreach($services as $service)
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 overflow-hidden">
+                        <div class="position-relative">
+                            @php
+                                // Prefer service image from DB if available; otherwise use web images (Unsplash).
+                                // Note: If your app blocks external images, consider saving images into `public/images` and storing the path in DB.
+                                $fallbackImage = match ($service->title) {
+                                    'Network Administration' => 'https://source.unsplash.com/featured/800x450/?network,server',
+                                    'Software Development' => 'https://source.unsplash.com/featured/800x450/?software,code',
+                                    'Mobile Application Development' => 'https://source.unsplash.com/featured/800x450/?mobile,app,technology',
+                                    default => 'https://source.unsplash.com/featured/800x450/?technology',
+                                };
+
+                                $serviceImage = !empty($service->image) ? $service->image : $fallbackImage;
+                            @endphp
+
+                            <img
+                                src="{{ $serviceImage }}"
+                                alt="{{ $service->title }}"
+                                class="card-img-top"
+                                style="height: 170px; object-fit: cover;"
+                                loading="lazy"
+                            >
+                        </div>
+
                         <div class="card-body text-center">
                             <i class="fas {{ $service->icon }} fa-3x mb-3 text-primary"></i>
                             <h5 class="card-title">{{ $service->title }}</h5>

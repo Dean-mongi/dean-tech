@@ -6,16 +6,9 @@ use App\Models\Service;
 use App\Models\Project;
 use App\Models\Message;
 use App\Models\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function dashboard()
     {
         $totalServices = Service::count();
