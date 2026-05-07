@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" role="img" aria-labelledby="title desc">
+  <title id="title">Digital business story</title>
+  <desc id="desc">Illustration of a business growth dashboard and digital workflow.</desc>
+  <rect width="800" height="540" rx="30" fill="#f8fafc"/>
+  <rect x="86" y="80" width="628" height="376" rx="30" fill="#dbeafe"/>
+  <rect x="130" y="128" width="254" height="280" rx="20" fill="#ffffff"/>
+  <rect x="420" y="128" width="250" height="124" rx="20" fill="#ffffff"/>
+  <rect x="420" y="284" width="250" height="124" rx="20" fill="#ffffff"/>
+  <path d="M160 348c56-92 92-44 136-116 32-52 54-34 70-72" fill="none" stroke="#2563eb" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="160" cy="348" r="14" fill="#22c55e"/>
+  <circle cx="296" cy="232" r="14" fill="#f59e0b"/>
+  <circle cx="366" cy="160" r="14" fill="#ef4444"/>
+  <rect x="456" y="166" width="154" height="14" rx="7" fill="#6366f1"/>
+  <rect x="456" y="198" width="118" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="456" y="326" width="178" height="14" rx="7" fill="#0f766e"/>
+  <rect x="456" y="358" width="120" height="14" rx="7" fill="#94a3b8"/>
+</svg>

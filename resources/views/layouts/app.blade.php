@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="{{ url('images/brand-logo.png') }}" alt="Dean Tech Logo" height="40" class="d-inline-block align-top me-2">
+                <img src="{{ url('images/brand logo.jpeg') }}" alt="Dean Tech Logo" height="40" class="d-inline-block align-top me-2">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h5>
-                        <img src="{{ url('images/brand-logo.png') }}" alt="Dean Tech Logo" height="30" class="me-2">
+                        <img src="{{ url('images/brand logo.jpeg') }}" alt="Dean Tech Logo" height="30" class="me-2" onerror="this.style.display='none'">
                     </h5>
                     <p>Professional IT Solutions in Tanzania</p>
                 </div>

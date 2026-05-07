@@ -11,16 +11,20 @@
                     <div class="card h-100 overflow-hidden">
                         <div class="position-relative">
                             @php
-                                // Prefer service image from DB if available; otherwise use web images (Unsplash).
-                                // Note: If your app blocks external images, consider saving images into `public/images` and storing the path in DB.
                                 $fallbackImage = match ($service->title) {
-                                    'Network Administration' => 'https://source.unsplash.com/featured/800x450/?network,server',
-                                    'Software Development' => 'https://source.unsplash.com/featured/800x450/?software,code',
-                                    'Mobile Application Development' => 'https://source.unsplash.com/featured/800x450/?mobile,app,technology',
-                                    default => 'https://source.unsplash.com/featured/800x450/?technology',
+                                    'Network Administration' => asset('images/network-administration.jfif'),
+                                    'Software Development' => asset('images/software-development-photo.jfif'),
+                                    'Mobile Application Development' => asset('images/mobile-app-development.jfif'),
+                                    default => asset('images/it-solutions.svg'),
                                 };
 
-                                $serviceImage = !empty($service->image) ? $service->image : $fallbackImage;
+                                $serviceImage = $fallbackImage;
+
+                                if (!empty($service->image)) {
+                                    $serviceImage = str_starts_with($service->image, 'http://') || str_starts_with($service->image, 'https://')
+                                        ? $service->image
+                                        : asset(ltrim($service->image, '/'));
+                                }
                             @endphp
 
                             <img

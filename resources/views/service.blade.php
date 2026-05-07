@@ -14,13 +14,16 @@
 
                 <!-- Hero Image -->
                 <div class="mb-5">
-                    @if($service->title == 'Network Administration')
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="Network Administration" class="img-fluid rounded shadow">
-                    @elseif($service->title == 'Software Development')
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=400&fit=crop" alt="Software Development" class="img-fluid rounded shadow">
-                    @elseif($service->title == 'Mobile Application Development')
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop" alt="Mobile Application Development" class="img-fluid rounded shadow">
-                    @endif
+                    @php
+                        $serviceImage = match ($service->title) {
+                            'Network Administration' => asset('images/network-administration.jfif'),
+                            'Software Development' => asset('images/software-development-photo.jfif'),
+                            'Mobile Application Development' => asset('images/mobile-app-development.jfif'),
+                            default => asset('images/it-solutions.svg'),
+                        };
+                    @endphp
+
+                    <img src="{{ $serviceImage }}" alt="{{ $service->title }}" class="img-fluid rounded shadow w-100" style="max-height: 420px; object-fit: cover;">
                 </div>
 
                 <!-- Detailed Description -->
@@ -66,7 +69,7 @@
                     </div>
                     <div class="col-md-6">
                         @if($service->title == 'Network Administration')
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop" alt="Network Infrastructure" class="img-fluid rounded shadow mb-3">
+                            <img src="{{ asset('images/network-administration.jfif') }}" alt="Network Infrastructure" class="img-fluid rounded shadow mb-3 w-100" style="height: 260px; object-fit: cover;">
                             <h4>Why Choose Our Network Services?</h4>
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-shield-alt text-primary me-2"></i> Enterprise-grade security</li>
@@ -75,7 +78,7 @@
                                 <li><i class="fas fa-headset text-primary me-2"></i> 24/7 technical support</li>
                             </ul>
                         @elseif($service->title == 'Software Development')
-                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop" alt="Software Development" class="img-fluid rounded shadow mb-3">
+                            <img src="{{ asset('images/software-development-photo.jfif') }}" alt="Software Development" class="img-fluid rounded shadow mb-3 w-100" style="height: 260px; object-fit: cover;">
                             <h4>Our Development Process</h4>
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-search text-primary me-2"></i> Requirements analysis</li>
@@ -84,7 +87,7 @@
                                 <li><i class="fas fa-bug text-primary me-2"></i> Comprehensive testing</li>
                             </ul>
                         @elseif($service->title == 'Mobile Application Development')
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop" alt="Mobile Apps" class="img-fluid rounded shadow mb-3">
+                            <img src="{{ asset('images/mobile-app-development.jfif') }}" alt="Mobile Apps" class="img-fluid rounded shadow mb-3 w-100" style="height: 260px; object-fit: cover;">
                             <h4>Platform Expertise</h4>
                             <ul class="list-unstyled">
                                 <li><i class="fab fa-android text-success me-2"></i> Android development</li>

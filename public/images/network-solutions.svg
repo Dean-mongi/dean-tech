@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Network infrastructure</title>
+  <desc id="desc">Illustration of servers, network cables, and connected devices.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" rx="30" fill="url(#bg)"/>
+  <g fill="#e2e8f0">
+    <rect x="116" y="108" width="190" height="304" rx="22"/>
+    <rect x="354" y="108" width="190" height="304" rx="22"/>
+    <rect x="592" y="108" width="190" height="304" rx="22"/>
+  </g>
+  <g fill="#0f172a">
+    <rect x="146" y="146" width="130" height="46" rx="10"/>
+    <rect x="384" y="146" width="130" height="46" rx="10"/>
+    <rect x="622" y="146" width="130" height="46" rx="10"/>
+    <rect x="146" y="226" width="130" height="46" rx="10"/>
+    <rect x="384" y="226" width="130" height="46" rx="10"/>
+    <rect x="622" y="226" width="130" height="46" rx="10"/>
+    <rect x="146" y="306" width="130" height="46" rx="10"/>
+    <rect x="384" y="306" width="130" height="46" rx="10"/>
+    <rect x="622" y="306" width="130" height="46" rx="10"/>
+  </g>
+  <g fill="#22c55e">
+    <circle cx="166" cy="169" r="7"/>
+    <circle cx="404" cy="249" r="7"/>
+    <circle cx="642" cy="329" r="7"/>
+  </g>
+  <g stroke="#5eead4" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M276 170h108"/>
+    <path d="M514 250h108"/>
+    <path d="M276 330h346"/>
+    <path d="M450 412v56"/>
+  </g>
+  <circle cx="450" cy="468" r="24" fill="#facc15"/>
+</svg>

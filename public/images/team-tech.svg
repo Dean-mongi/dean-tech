@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" role="img" aria-labelledby="title desc">
+  <title id="title">Technology team</title>
+  <desc id="desc">Illustration of a collaborative technology team around a dashboard.</desc>
+  <rect width="700" height="500" rx="30" fill="#eef2ff"/>
+  <rect x="156" y="92" width="388" height="224" rx="24" fill="#1e293b"/>
+  <rect x="190" y="132" width="130" height="18" rx="9" fill="#38bdf8"/>
+  <rect x="190" y="178" width="214" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="190" y="210" width="280" height="14" rx="7" fill="#64748b"/>
+  <rect x="190" y="258" width="90" height="18" rx="9" fill="#22c55e"/>
+  <rect x="306" y="258" width="90" height="18" rx="9" fill="#f59e0b"/>
+  <rect x="422" y="258" width="90" height="18" rx="9" fill="#a78bfa"/>
+  <g fill="#4f46e5">
+    <circle cx="170" cy="380" r="42"/>
+    <circle cx="350" cy="390" r="46"/>
+    <circle cx="530" cy="380" r="42"/>
+  </g>
+  <g fill="#fde68a">
+    <circle cx="170" cy="326" r="24"/>
+    <circle cx="350" cy="330" r="26"/>
+    <circle cx="530" cy="326" r="24"/>
+  </g>
+  <g fill="#312e81" opacity=".16">
+    <circle cx="88" cy="92" r="56"/>
+    <circle cx="612" cy="94" r="72"/>
+    <circle cx="602" cy="430" r="52"/>
+  </g>
+</svg>

@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="text-center">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=400&fit=crop" alt="Dean Tech Team" class="img-fluid rounded shadow-lg" style="transform: rotate(-3deg);">
+                    <img src="{{ asset('images/team-tech.svg') }}" alt="Dean Tech Team" class="img-fluid rounded shadow-lg" style="transform: rotate(-3deg);">
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Our Story" class="img-fluid rounded shadow">
+                <img src="{{ asset('images/business-story.svg') }}" alt="Our Story" class="img-fluid rounded shadow">
             </div>
             <div class="col-lg-6">
                 <h2 class="display-5 fw-bold text-primary mb-4">Our Story</h2>
@@ -125,7 +125,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="expertise-card card h-100 border-0 shadow-lg">
                     <div class="card-body text-center p-4">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop" alt="Network Solutions" class="img-fluid rounded mb-3">
+                        <img src="{{ asset('images/network-administration.jfif') }}" alt="Network Solutions" class="img-fluid rounded mb-3 w-100" style="height: 180px; object-fit: cover;">
                         <h5 class="card-title fw-bold">Network Infrastructure</h5>
                         <p class="card-text">Complete network setup, security, and monitoring solutions for reliable business operations.</p>
                     </div>
@@ -134,7 +134,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="expertise-card card h-100 border-0 shadow-lg">
                     <div class="card-body text-center p-4">
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=200&fit=crop" alt="Software Development" class="img-fluid rounded mb-3">
+                        <img src="{{ asset('images/software-development-photo.jfif') }}" alt="Software Development" class="img-fluid rounded mb-3 w-100" style="height: 180px; object-fit: cover;">
                         <h5 class="card-title fw-bold">Custom Software</h5>
                         <p class="card-text">Tailored software solutions designed to streamline your business processes and boost productivity.</p>
                     </div>
@@ -143,7 +143,7 @@
             <div class="col-lg-4 mb-4">
                 <div class="expertise-card card h-100 border-0 shadow-lg">
                     <div class="card-body text-center p-4">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop" alt="Mobile Development" class="img-fluid rounded mb-3">
+                        <img src="{{ asset('images/mobile-app-development.jfif') }}" alt="Mobile Development" class="img-fluid rounded mb-3 w-100" style="height: 180px; object-fit: cover;">
                         <h5 class="card-title fw-bold">Mobile Applications</h5>
                         <p class="card-text">Native and cross-platform mobile apps that engage customers and enhance business mobility.</p>
                     </div>

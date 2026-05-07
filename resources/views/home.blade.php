@@ -48,7 +48,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="hero-image text-center">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=500&fit=crop" alt="IT Solutions" class="img-fluid rounded shadow-lg" style="transform: rotate(-5deg);">
+                    <img src="{{ asset('images/software-development-photo.jfif') }}" alt="IT Solutions" class="img-fluid rounded shadow-lg" style="max-height: 500px; object-fit: cover; transform: rotate(-5deg);">
                     <div class="floating-card position-absolute" style="top: 20%; right: 10%; background: rgba(255,255,255,0.9); padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
                         <i class="fas fa-code text-primary fa-2x mb-2"></i>
                         <h6 class="text-dark mb-1">Custom Development</h6>
