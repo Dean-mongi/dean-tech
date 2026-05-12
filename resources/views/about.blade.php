@@ -65,7 +65,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="text-center p-3 bg-white rounded shadow-sm">
-                            <h3 class="text-primary fw-bold">2018</h3>
+                            <h3 class="text-primary fw-bold">2024</h3>
                             <small class="text-muted">Founded</small>
                         </div>
                     </div>
