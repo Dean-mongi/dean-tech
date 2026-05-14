@@ -15,12 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'security.headers' => \App\Http\Middleware\SecurityHeadersMiddleware::class,
-            'https' => \App\Http\Middleware\HttpsMiddleware::class,
         ]);
 
         // Append security middleware globally
         $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
-        $middleware->append(\App\Http\Middleware\HttpsMiddleware::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
