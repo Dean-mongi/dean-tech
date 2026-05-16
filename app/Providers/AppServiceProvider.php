@@ -31,11 +31,6 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(3)->by($request->ip());
         });
 
-        // Rate limit contact form: 3 per minute per IP
-        RateLimiter::for('contact', function ($request) {
-            return Limit::perMinute(3)->by($request->ip());
-        });
-
         // Rate limit general API: 60 per minute per IP
         RateLimiter::for('api', function ($request) {
             return Limit::perMinute(60)->by($request->ip());

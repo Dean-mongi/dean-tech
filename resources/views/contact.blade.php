@@ -11,7 +11,7 @@
                     <p class="lead text-muted">Get in touch with us for your technology needs</p>
                 </div>
 
-                <div class="row">
+                <div class="row g-4">
                     <!-- Contact Information -->
                     <div class="col-lg-5 mb-4">
                         <div class="card h-100 shadow">
@@ -66,85 +66,67 @@
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
+                    <!-- Contact Options -->
                     <div class="col-lg-7">
                         <div class="card shadow">
                             <div class="card-body">
                                 <h3 class="card-title mb-4">
-                                    <i class="fas fa-envelope text-primary me-2"></i>
-                                    Send us a Message
+                                    <i class="fas fa-comments text-primary me-2"></i>
+                                    Choose How to Contact Us
                                 </h3>
 
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                        <i class="fas fa-check-circle me-2"></i>
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
+                                <p class="text-muted mb-4">
+                                    Pick the service you need, then contact us on WhatsApp or email with a ready message.
+                                </p>
 
-                                @if($errors->any())
-                                    <div class="alert alert-danger">
-                                        <i class="fas fa-exclamation-triangle me-2"></i>
-                                        Please fix the errors below.
-                                    </div>
-                                @endif
+                                @php
+                                    $phone = '255757624348';
+                                    $email = 'deanmongi90@gmail.com';
+                                    $requestedService = request('service');
+                                    $serviceOptions = $services->isNotEmpty()
+                                        ? $services
+                                        : collect([
+                                            (object) ['title' => 'Network Administration'],
+                                            (object) ['title' => 'Software Development'],
+                                            (object) ['title' => 'Mobile Application Development'],
+                                        ]);
+                                @endphp
 
-                                <form action="{{ route('contact.submit') }}" method="POST">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Full Name *</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                               id="name" name="name" value="{{ old('name') }}" required>
-                                        @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                <div class="d-grid gap-3">
+                                    @foreach($serviceOptions as $service)
+                                        @php
+                                            $serviceTitle = $service->title;
+                                            $prefill = "Hello Dean Tech, I need help with {$serviceTitle}. Please tell me how you can help solve this and what details you need from me.";
+                                            $subject = "Service request: {$serviceTitle}";
+                                            $isRequested = $requestedService === $serviceTitle;
+                                        @endphp
 
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address *</label>
-                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                               id="email" name="email" value="{{ old('email') }}" required>
-                                        @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control @error('phone') is-invalid @enderror"
-                                               id="phone" name="phone" value="{{ old('phone') }}">
-                                        @error('phone')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="service" class="form-label">Service Interested In</label>
-                                        <select class="form-select @error('service') is-invalid @enderror" id="service" name="service">
-                                            <option value="">Select a service...</option>
-                                            @foreach($services as $service)
-                                                <option value="{{ $service->title }}" {{ old('service', request('service')) == $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('service')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="message" class="form-label">Message *</label>
-                                        <textarea class="form-control @error('message') is-invalid @enderror"
-                                                  id="message" name="message" rows="5" required>{{ old('message') }}</textarea>
-                                        @error('message')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                                        <i class="fas fa-paper-plane me-2"></i>
-                                        Send Message
-                                    </button>
-                                </form>
+                                        <div class="border rounded p-3 {{ $isRequested ? 'border-primary bg-primary bg-opacity-10' : 'bg-white' }}">
+                                            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                                                <div>
+                                                    <h5 class="mb-1">{{ $serviceTitle }}</h5>
+                                                    <p class="text-muted mb-0">Tell us what you need and we will advise the best way to solve it.</p>
+                                                </div>
+                                                <div class="d-flex flex-column flex-sm-row gap-2">
+                                                    <a
+                                                        href="https://wa.me/{{ $phone }}?text={{ rawurlencode($prefill) }}"
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        class="btn btn-success"
+                                                    >
+                                                        <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                                    </a>
+                                                    <a
+                                                        href="mailto:{{ $email }}?subject={{ rawurlencode($subject) }}&body={{ rawurlencode($prefill) }}"
+                                                        class="btn btn-outline-primary"
+                                                    >
+                                                        <i class="fas fa-envelope me-2"></i>Email
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
