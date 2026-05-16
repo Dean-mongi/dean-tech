@@ -122,9 +122,9 @@
                                         <label for="service" class="form-label">Service Interested In</label>
                                         <select class="form-select @error('service') is-invalid @enderror" id="service" name="service">
                                             <option value="">Select a service...</option>
-                                            <option value="Network Administration" {{ old('service') == 'Network Administration' ? 'selected' : '' }}>Network Administration</option>
-                                            <option value="Software Development" {{ old('service') == 'Software Development' ? 'selected' : '' }}>Software Development</option>
-                                            <option value="Mobile Application Development" {{ old('service') == 'Mobile Application Development' ? 'selected' : '' }}>Mobile Application Development</option>
+                                            @foreach($services as $service)
+                                                <option value="{{ $service->title }}" {{ old('service', request('service')) == $service->title ? 'selected' : '' }}>{{ $service->title }}</option>
+                                            @endforeach
                                         </select>
                                         @error('service')
                                             <div class="invalid-feedback">{{ $message }}</div>

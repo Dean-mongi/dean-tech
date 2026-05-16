@@ -77,26 +77,26 @@
 </head>
 <body>
     <div class="header">
-        <h1 style="margin: 0;">🔔 New Service Request</h1>
+        <h1 style="margin: 0;">New Service Request</h1>
         <p style="margin: 10px 0 0 0;">You have a new inquiry from Dean Tech website</p>
     </div>
     
     <div class="content">
         <div class="info-box">
             <div class="info-row">
-                <span class="label">👤 Client Name</span>
+                <span class="label">Client Name</span>
                 <span class="value">{{ $name }}</span>
             </div>
             
             <div class="info-row">
-                <span class="label">📧 Email Address</span>
+                <span class="label">Email Address</span>
                 <span class="value">
                     <a href="mailto:{{ $email }}">{{ $email }}</a>
                 </span>
             </div>
             
             <div class="info-row">
-                <span class="label">📱 Phone Number</span>
+                <span class="label">Phone Number</span>
                 <span class="value">
                     @if($phone)
                         <a href="tel:{{ $phone }}">{{ $phone }}</a>
@@ -107,13 +107,13 @@
             </div>
             
             <div class="info-row">
-                <span class="label">🛠 Service Requested</span>
+                <span class="label">Service Requested</span>
                 <span class="value">{{ $service ?? 'General Inquiry' }}</span>
             </div>
         </div>
         
         <div class="message-box">
-            <span class="label">💬 Message</span>
+            <span class="label">Message</span>
             <p class="value">{{ $clientMessage }}</p>
         </div>
         

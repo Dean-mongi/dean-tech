@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\ServiceRequestNotification;
 use App\Models\Admin;
+use App\Models\Service;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -40,6 +41,12 @@ class ExampleTest extends TestCase
     public function test_contact_form_stores_phone_and_service(): void
     {
         Mail::fake();
+        config(['mail.contact_recipient.address' => 'requests@example.com']);
+
+        Service::create([
+            'title' => 'Software Development',
+            'description' => 'Custom software projects.',
+        ]);
 
         $this->post(route('contact.submit'), [
             'name' => 'Jane Client',
@@ -56,6 +63,32 @@ class ExampleTest extends TestCase
             'service' => 'Software Development',
         ]);
 
-        Mail::assertSent(ServiceRequestNotification::class);
+        Mail::assertSent(ServiceRequestNotification::class, function (ServiceRequestNotification $mail) {
+            return $mail->hasTo('requests@example.com')
+                && $mail->hasReplyTo('jane@example.com')
+                && $mail->service === 'Software Development';
+        });
+    }
+
+    public function test_contact_form_rejects_unknown_service(): void
+    {
+        Mail::fake();
+
+        $response = $this->from(route('contact'))->post(route('contact.submit'), [
+            'name' => 'Jane Client',
+            'email' => 'jane@example.com',
+            'phone' => '0757624348',
+            'service' => 'Unknown Service',
+            'message' => 'Please help with a new system.',
+        ]);
+
+        $response->assertRedirect(route('contact'));
+        $response->assertSessionHasErrors('service');
+
+        $this->assertDatabaseMissing('messages', [
+            'email' => 'jane@example.com',
+        ]);
+
+        Mail::assertNothingSent();
     }
 }
