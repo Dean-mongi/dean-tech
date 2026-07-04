@@ -21,10 +21,9 @@ Route::middleware('guest')->group(function () {
                 ->middleware('throttle:register');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
-});
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+            ->middleware('auth:web,admin')
+            ->name('logout');
 
 // Email Verification Routes
 Route::get('/email/verify', function () {

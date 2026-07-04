@@ -34,6 +34,25 @@ class ExampleTest extends TestCase
         foreach (['admin.dashboard', 'admin.services', 'admin.projects', 'admin.messages', 'admin.clients'] as $route) {
             $this->get(route($route))->assertOk();
         }
+
+        $this->get(route('admin.dashboard'))
+            ->assertSee('admin-sidebar', false)
+            ->assertSee('Dashboard');
+    }
+
+    public function test_admins_can_logout(): void
+    {
+        $admin = Admin::create([
+            'username' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => 'password',
+        ]);
+
+        $this->actingAs($admin, 'admin');
+
+        $this->post(route('logout'))->assertRedirect('/');
+
+        $this->assertGuest('admin');
     }
 
     public function test_contact_page_shows_direct_contact_options_for_services(): void

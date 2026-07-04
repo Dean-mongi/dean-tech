@@ -9,6 +9,17 @@
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @php
+        $isAdminArea = request()->routeIs('admin.*');
+        $adminLinks = [
+            ['route' => 'admin.dashboard', 'icon' => 'fa-gauge-high', 'label' => 'Dashboard'],
+            ['route' => 'admin.services', 'icon' => 'fa-screwdriver-wrench', 'label' => 'Services'],
+            ['route' => 'admin.projects', 'icon' => 'fa-diagram-project', 'label' => 'Projects'],
+            ['route' => 'admin.messages', 'icon' => 'fa-envelope', 'label' => 'Messages'],
+            ['route' => 'admin.clients', 'icon' => 'fa-users', 'label' => 'Clients'],
+        ];
+    @endphp
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -70,13 +81,37 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main>
-        @yield('content')
-    </main>
+    @if($isAdminArea)
+        <div class="admin-shell">
+            <aside class="admin-sidebar" aria-label="Admin navigation">
+                <div class="admin-sidebar-header">
+                    <span class="admin-sidebar-title">Admin</span>
+                    <span class="admin-sidebar-subtitle">Dean Tech</span>
+                </div>
+                <nav class="admin-sidebar-nav">
+                    @foreach($adminLinks as $link)
+                        <a class="admin-sidebar-link {{ request()->routeIs($link['route']) ? 'active' : '' }}"
+                           href="{{ route($link['route']) }}">
+                            <i class="fas {{ $link['icon'] }}" aria-hidden="true"></i>
+                            <span>{{ $link['label'] }}</span>
+                        </a>
+                    @endforeach
+                </nav>
+            </aside>
+
+            <main class="admin-content">
+                @yield('content')
+            </main>
+        </div>
+    @else
+        <!-- Main Content -->
+        <main>
+            @yield('content')
+        </main>
+    @endif
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
+    <footer class="bg-dark text-white py-4 {{ $isAdminArea ? 'mt-0' : 'mt-5' }}">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
